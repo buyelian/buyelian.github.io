@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[HUD - 1398 入门DP/母函数]]></title>
+    <url>%2Fundefined%2FHUD-1398-%E5%85%A5%E9%97%A8DP-%E6%AF%8D%E5%87%BD%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[母函数入门图解 题意：火星上的货币有1,4,9,16,25…..2^17这17中面值的硬币，问任意给定一个不大于300的正整数面额，用这些硬币来组成此面额总共有多少种组合种数。唔，我自己是用DP做的，但是题解给的是母函数，这里贴一下两种答案但是我觉得母函数做法时间复杂度太高了，dp打表快一点，，而且，，好像做法一样啊。。。。。。。。母函数 1234567891011121314151617181920212223242526272829303132#include&lt;iostream&gt;#include&lt;stdio.h&gt;#include&lt;string.h&gt;#include&lt;stdlib.h&gt;#include&lt;algorithm&gt; using namespace std; int main()&#123; int n,i,j,k,c1[305],c2[305]; //第一次数组开300 WA了，， while(scanf("%d",&amp;n),n) &#123; for(i=0;i&lt;=n;i++)&#123; c1[i] = 1; //这里初始化应该是第一个括号表达式里 x次幂 的系数 c2[i] = 0; &#125; for(i=2;i*i&lt;=n;i++)&#123; //表达式个数，从第二个表达式开始计算 for(j=0;j&lt;=n;j++)&#123; for(k=0;j+k&lt;=n;k+=(i*i))&#123; c2[j+k] += c1[j]; &#125; &#125; for(j=0;j&lt;=n;j++)&#123; c1[j] = c2[j]; c2[j] = 0; &#125; &#125; printf("%d\n",c1[n]); &#125; return 0;&#125; DP 123456789101112131415161718#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstring&gt;using namespace std;int money[]=&#123;1,4,9,16,25,36,49,64,81,100,121,144,169,196,225,256,289&#125;;int dp[320];int main()&#123; int n; while(~scanf("%d",&amp;n) &amp;&amp; n)&#123; memset(dp,0,sizeof(dp)); dp[0]=1; for(int i=0;i&lt;17;i++) for(int j=money[i];j&lt;=n;j++) dp[j]+=dp[j-money[i]]; printf("%d\n",dp[n]); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法学习</category>
+      </categories>
+      <tags>
+        <tag>母函数</tag>
+      </tags>
+  </entry>
+</search>
